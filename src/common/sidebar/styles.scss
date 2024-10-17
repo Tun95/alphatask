@@ -1,0 +1,119 @@
+.side_bar {
+  width: 250px;
+  transition: width 0.3s ease;
+  border-right: 1px solid var(--color-border);
+  &.collapsed {
+    width: 70px;
+  }
+
+  .content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+
+    .logo-section {
+      height: 30px;
+      padding: 20px;
+      margin-top: 10px;
+      .logo {
+        height: 28px;
+        width: 28px;
+        margin-right: 10px;
+      }
+      .logo_text {
+        color: var(--color-dark-gray);
+      }
+    }
+
+    .menu {
+      flex-grow: 1;
+      padding: 10px 5px;
+
+      .menu_item {
+        display: flex;
+        align-items: center;
+        padding: 7px 20px;
+        margin: 10px 0px;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--color-dark-gray);
+        .list_item {
+          text-wrap: nowrap;
+          padding: 0px;
+        }
+        .icon {
+          color: var(--color-primary);
+          font-size: 22px;
+          position: relative;
+          right: 4px;
+        }
+        .dot {
+          position: relative;
+          right: 15px;
+          bottom: 8px;
+          .dot_icon {
+            font-size: 11px !important;
+            color: var(--color-red);
+          }
+        }
+        .notifictaion_counter {
+          width: 100%;
+          .couter {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-red);
+            color: var(--color-white);
+          }
+        }
+        &:hover {
+          transition: var(--transition);
+          background-color: var(--color-hover-bg);
+          border-radius: 3px;
+          .icon {
+            transition: var(--transition);
+            color: var(--color-text);
+          }
+          .list_item {
+            transition: var(--transition);
+            color: var(--color-text);
+          }
+        }
+        &.dark_mode {
+          height: 40px;
+
+          .switch {
+            position: relative;
+            right: 6px;
+          }
+          .list_item {
+            position: relative;
+            right: 6px;
+          }
+        }
+        &.user_info {
+          display: flex;
+          align-items: center;
+          height: 45px;
+          .user_icon {
+            height: 30px;
+            width: 30px;
+            margin-right: 10px;
+            position: relative;
+            right: 6px;
+          }
+
+          .name_email {
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            position: relative;
+            right: 17px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,23 +1,107 @@
+// SideBar.tsx
 import "./styles.scss";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { useState } from "react";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import RecordVoiceOverOutlinedIcon from "@mui/icons-material/RecordVoiceOverOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import logo from "../../assets/logo/logo.png";
+import user from "../../assets/icons/user.png";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import { Switch } from "antd";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { CommentOutlined, SettingOutlined } from "@ant-design/icons";
 
-function SideBar() {
+const SideBar = () => {
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <div className="side_bar">
+    <div className={`side_bar ${collapsed ? "collapsed" : ""}`}>
       <div className="content">
-        <Sidebar>
-          <Menu>
-            <SubMenu label="Charts">
-              <MenuItem> Pie charts </MenuItem>
-              <MenuItem> Line charts </MenuItem>
-            </SubMenu>
-            <MenuItem> Documentation </MenuItem>
-            <MenuItem> Calendar </MenuItem>
-          </Menu>
-        </Sidebar>
+        {/* Logo section */}
+        <div className="logo-section a_flex">
+          <img src={logo} alt="Logo" className="logo" />
+          {!collapsed && <h2 className="logo_text">Alphat</h2>}
+        </div>
+
+        {/* Menu items */}
+        <div className="menu">
+          <div className="top">
+            <div className="menu_item">
+              <HomeOutlinedIcon className="icon" />
+              {!collapsed && <span className="list_item"> Home</span>}
+            </div>
+            <div className="menu_item">
+              <CalendarMonthOutlinedIcon className="icon" />
+              {!collapsed && <span className="list_item"> Events</span>}
+            </div>
+            <div className="menu_item">
+              <RecordVoiceOverOutlinedIcon className="icon" />
+              {!collapsed && <span className="list_item"> Speakers</span>}
+            </div>
+            <div className="menu_item">
+              <ArticleOutlinedIcon className="icon" />
+              {!collapsed && <span className="list_item"> Reports</span>}
+            </div>
+          </div>
+          <div className="bottom">
+            {" "}
+            <div className="menu_item">
+              <NotificationsNoneOutlinedIcon className="icon" />
+              {collapsed && (
+                <span className="dot">
+                  <FiberManualRecordIcon className="dot_icon" />
+                </span>
+              )}
+              <div className="notifictaion_counter c_flex">
+                {" "}
+                {!collapsed && (
+                  <>
+                    <span className="list_item"> Notifications</span>
+                    <span className="couter l_flex">
+                      <small className="count">3</small>
+                    </span>{" "}
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="menu_item">
+              <CommentOutlined className="icon" />
+              {!collapsed && <span className="list_item"> Messages</span>}
+            </div>
+            <div className="menu_item">
+              <SettingOutlined className="icon" />
+              {!collapsed && <span className="list_item"> Settings</span>}
+            </div>
+            {/* Collapse/Expand functionality */}
+            <div className="menu_item" onClick={() => setCollapsed(!collapsed)}>
+              {collapsed ? (
+                <KeyboardDoubleArrowLeftIcon className="icon" />
+              ) : (
+                <KeyboardDoubleArrowRightIcon className="icon" />
+              )}
+              {!collapsed && <span className="list_item"> Collapse</span>}
+            </div>
+            <div className="menu_item dark_mode">
+              <Switch size="small" defaultChecked className="switch" />
+              {!collapsed && <span className="list_item"> Dark mode</span>}
+            </div>
+            <div className="menu_item user_info">
+              <img src={user} alt="User" className="user_icon" />
+              {!collapsed && (
+                <div className="name_email">
+                  <span className="name">Redra Devi</span>
+                  <span className="email">rudra.dev@gmail.com</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default SideBar;
