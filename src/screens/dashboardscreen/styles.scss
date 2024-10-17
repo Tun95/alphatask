@@ -3,6 +3,20 @@
     .content {
       width: 100%;
       gap: 20px;
+      .left {
+        flex: 1;
+      }
+      .right {
+        padding-right: 20px;
+        width: 100%;
+        .widgets {
+          display: flex;
+          padding: 20px 0px;
+          gap: 20px;
+          width: 100%;
+          flex-wrap: wrap;
+        }
+      }
     }
   }
 }

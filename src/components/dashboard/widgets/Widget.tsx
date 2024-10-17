@@ -1,14 +1,8 @@
 import "./styles.scss";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import HowToVoteOutlinedIcon from "@mui/icons-material/HowToVoteOutlined";
-import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
-
-// Format numbers with commas (e.g., 2,300,454)
-const formatNumberWithCommas = (num: number): string => {
-  const validNumber = isNaN(num) || num === null || num === undefined ? 0 : num; // Fallback to 0 if num is invalid
-  return validNumber.toLocaleString();
-};
+import CallReceivedOutlinedIcon from "@mui/icons-material/CallReceivedOutlined";
+import CallMadeOutlinedIcon from "@mui/icons-material/CallMadeOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { formatNumberWithCommas } from "../../../utilities/utils/Utils";
 
 interface WidgetProps {
   type: "events" | "speakers" | "users" | "revenue";
@@ -29,7 +23,8 @@ const Widget: React.FC<WidgetProps> = ({
     | {
         title: string;
         isMoney: boolean;
-        icon: JSX.Element;
+        percentageChange: number;
+        isIncrease: boolean;
       }
     | undefined;
 
@@ -51,51 +46,36 @@ const Widget: React.FC<WidgetProps> = ({
       data = {
         title: "Total Events",
         isMoney: false,
-        icon: (
-          <PersonOutlineOutlinedIcon
-            className="icon"
-            style={{ color: "crimson", backgroundColor: "rgba(255,0,0,0.2)" }}
-          />
-        ),
+
+        percentageChange: 25, // Example
+        isIncrease: true,
       };
       break;
     case "speakers":
       data = {
         title: "Active Speakers",
         isMoney: false,
-        icon: (
-          <ReceiptOutlinedIcon
-            className="icon"
-            style={{
-              color: "goldenrod",
-              backgroundColor: "rgba(218,165,32,0.2)",
-            }}
-          />
-        ),
+
+        percentageChange: 15, // Example
+        isIncrease: true,
       };
       break;
     case "users":
       data = {
-        title: "Total Rgistrations",
+        title: "Total Registrations",
         isMoney: false,
-        icon: (
-          <HowToVoteOutlinedIcon
-            className="icon"
-            style={{ color: "green", backgroundColor: "rgba(0,128,0,0.2)" }}
-          />
-        ),
+
+        percentageChange: 30, // Example
+        isIncrease: true,
       };
       break;
     case "revenue":
       data = {
         title: "Total Revenue",
         isMoney: true,
-        icon: (
-          <NewspaperOutlinedIcon
-            className="icon"
-            style={{ color: "purple", backgroundColor: "rgba(128,0,128,0.2)" }}
-          />
-        ),
+
+        percentageChange: -10, // Example
+        isIncrease: false,
       };
       break;
     default:
@@ -108,15 +88,31 @@ const Widget: React.FC<WidgetProps> = ({
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">{data.title}</span>
-        <div className="couter_percentage">
+        <div className="title_info a_flex">
+          <span className="title">{data.title}</span>
+          <span className="info_icon">
+            <InfoOutlinedIcon className="icon" />
+          </span>
+        </div>
+        <div className="counter_percentage a_flex">
           <span className="counter">
             {data.isMoney
               ? `$${dataType.toLocaleString()}`
               : formatNumberWithCommas(dataType)}
           </span>
-          <span className="percentage_icon">
-            <div className="icon">{data.icon}</div>.
+          <span className="percentage_section">
+            <div
+              className="percentage a_flex"
+              style={{ color: data.isIncrease ? "green" : "red" }}
+            >
+              {data.isIncrease ? (
+                <CallMadeOutlinedIcon className="percentage_icon" />
+              ) : (
+                <CallReceivedOutlinedIcon className="percentage_icon" />
+              )}
+              {data.isIncrease ? "+" : "-"}
+              {Math.abs(data.percentageChange)?.toFixed(1)}%
+            </div>
           </span>
         </div>
       </div>
