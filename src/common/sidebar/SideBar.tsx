@@ -13,17 +13,33 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import { Switch } from "antd";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { CommentOutlined, SettingOutlined } from "@ant-design/icons";
+import CloseIcon from "@mui/icons-material/Close";
+import { useAppContext } from "../../utilities/utils/Utils";
+import { Anchor } from "../../context/Context";
 
-const SideBar = () => {
+interface SideBarProps {
+  anchor: Anchor;
+}
+
+const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const { toggleDrawer } = useAppContext();
 
   return (
     <div className={`side_bar ${collapsed ? "collapsed" : ""}`}>
       <div className="content">
         {/* Logo section */}
-        <div className="logo-section a_flex">
-          <img src={logo} alt="Logo" className="logo" />
-          {!collapsed && <h2 className="logo_text">Alphat</h2>}
+        <div className="logo_icon c_flex">
+          <div className="logo-section a_flex">
+            <img src={logo} alt="Logo" className="logo" />
+            {!collapsed && <h2 className="logo_text">Alphat</h2>}
+          </div>
+          <div className="close_icon l_flex">
+            <CloseIcon
+              className="icon"
+              onClick={toggleDrawer(anchor as Anchor, false)}
+            />
+          </div>
         </div>
 
         {/* Menu items */}
@@ -46,8 +62,8 @@ const SideBar = () => {
               {!collapsed && <span className="list_item"> Reports</span>}
             </div>
           </div>
+
           <div className="bottom">
-            {" "}
             <div className="menu_item">
               <NotificationsNoneOutlinedIcon className="icon" />
               {collapsed && (
@@ -75,8 +91,12 @@ const SideBar = () => {
               <SettingOutlined className="icon" />
               {!collapsed && <span className="list_item"> Settings</span>}
             </div>
+
             {/* Collapse/Expand functionality */}
-            <div className="menu_item" onClick={() => setCollapsed(!collapsed)}>
+            <div
+              className="menu_item collapse_item"
+              onClick={() => setCollapsed(!collapsed)}
+            >
               {collapsed ? (
                 <KeyboardDoubleArrowLeftIcon className="icon" />
               ) : (
@@ -84,10 +104,12 @@ const SideBar = () => {
               )}
               {!collapsed && <span className="list_item"> Collapse</span>}
             </div>
+
             <div className="menu_item dark_mode">
               <Switch size="small" defaultChecked className="switch" />
               {!collapsed && <span className="list_item"> Dark mode</span>}
             </div>
+
             <div className="menu_item user_info">
               <img src={user} alt="User" className="user_icon" />
               {!collapsed && (

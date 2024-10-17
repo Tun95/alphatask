@@ -3,6 +3,7 @@ import "./styles.scss";
 import NavBar from "../../common/navbar/NavBar";
 import SideBar from "../../common/sidebar/SideBar";
 import Widget from "../../components/dashboard/widgets/Widget";
+
 function DashboardScreen() {
   const TotalEvent = 100000;
   const TotalSpeakers = 25;
@@ -17,7 +18,9 @@ function DashboardScreen() {
       <div className="dashborad_content">
         <div className="content f_flex">
           <div className="left">
-            <SideBar />
+            <div className="side_menu">
+              <SideBar anchor="left" />
+            </div>
           </div>
 
           <div className="right ">
@@ -35,6 +38,7 @@ function DashboardScreen() {
               <div className="chart"></div>
               <div className="slider"></div>
             </div>
+            <div className="table_filters"></div>
           </div>
         </div>
       </div>

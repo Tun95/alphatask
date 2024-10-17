@@ -47,7 +47,7 @@ const Widget: React.FC<WidgetProps> = ({
         title: "Total Events",
         isMoney: false,
 
-        percentageChange: 25, // Example
+        percentageChange: 25,
         isIncrease: true,
       };
       break;
@@ -56,7 +56,7 @@ const Widget: React.FC<WidgetProps> = ({
         title: "Active Speakers",
         isMoney: false,
 
-        percentageChange: 15, // Example
+        percentageChange: 15,
         isIncrease: true,
       };
       break;
@@ -65,7 +65,7 @@ const Widget: React.FC<WidgetProps> = ({
         title: "Total Registrations",
         isMoney: false,
 
-        percentageChange: 30, // Example
+        percentageChange: 30,
         isIncrease: true,
       };
       break;
@@ -74,7 +74,7 @@ const Widget: React.FC<WidgetProps> = ({
         title: "Total Revenue",
         isMoney: true,
 
-        percentageChange: -10, // Example
+        percentageChange: -10,
         isIncrease: false,
       };
       break;

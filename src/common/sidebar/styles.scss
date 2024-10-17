@@ -12,17 +12,32 @@
     flex-direction: column;
     background-color: var(--color-white);
 
-    .logo-section {
-      height: 30px;
+    .logo_icon {
       padding: 20px;
+      height: 30px;
+
       margin-top: 10px;
-      .logo {
-        height: 28px;
-        width: 28px;
-        margin-right: 10px;
+      .logo-section {
+        .logo {
+          height: 28px;
+          width: 28px;
+          margin-right: 10px;
+        }
+        .logo_text {
+          color: var(--color-dark-gray);
+        }
       }
-      .logo_text {
-        color: var(--color-dark-gray);
+      .close_icon {
+        display: none;
+        border: 1px solid var(--color-border);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        .icon {
+          font-size: 13px;
+          color: var(--color-dark-gray);
+        }
       }
     }
 
@@ -111,6 +126,35 @@
             font-size: 12px;
             position: relative;
             right: 17px;
+          }
+        }
+      }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 900px) {
+    width: 300px;
+    .content {
+      .logo_icon {
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 26.5px;
+        margin-top: 8px;
+        .close_icon {
+          display: flex;
+        }
+      }
+      .menu {
+        .menu_item {
+          &.collapse_item {
+            display: none;
+          }
+          .notifictaion_counter {
+            .couter {
+              .count {
+                position: relative;
+                top: 1px;
+              }
+            }
           }
         }
       }
