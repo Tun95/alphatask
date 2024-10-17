@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #f3f5f9;
+  --color-border: #e7e8eb;
+  --color-background: #f6f9fc;
+  --color-primary: #0d9a7d;
+  --color-red: #f43f5e;
+  --color-dark: #111111;
+  --color-black: #2e2e2e;
+  --color-white: #ffffff;
+  --color-dark-gray: #334155;
+  --color-text-dull: #64748b;
+  --color-green: #10b981;
+  --color-gr-bg: #10b9818e;
+  --color-blue: #3b82f6;
+  --color-bl-bg: #3b83f694;
+  --transition: all 400ms ease;
+  --light-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  --container-width-lg: 85%;
+  --container-width-md: 95%;
+  --container-width-sm: 96%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--color-white);
+}
+
+.container {
+  width: var(--container-width-lg);
+  max-width: 1600px;
+  margin: auto;
+}
+
+.f_flex {
+  display: flex;
+}
+.d_flex {
+  display: flex;
+  justify-content: space-between;
+}
+.d_grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.j_flex {
+  display: flex;
+  justify-content: space-around;
+}
+.c_flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a_flex {
+  display: flex;
+  align-items: center;
+}
+.l_flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.s_flex {
+  display: flex;
+
+  flex-direction: column;
+}
+.p_flex {
+  display: flex;
+  justify-content: center;
+}
+
+/*----- control btn -------*/
+.control_btn .next,
+.control_btn .prev {
+  position: absolute;
+  top: -47px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: 0.5s;
+  z-index: 5;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-light-gray);
+}
+.control_btn .prev {
+  right: 180px;
+}
+.control_btn .next {
+  right: 120px;
+}
+.control_btn .icon {
+  font-size: 30px;
+}
+.control_btn .next:hover,
+.control_btn .prev:hover {
+  color: var(--color-primary);
+}
+
+/*----- Resolutions -------*/
+/*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
+@media screen and (max-width: 1300px) {
+  .container {
+    width: var(--container-width-md);
+  }
+}
+/*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+@media screen and (max-width: 720px) {
+  .container {
+    width: var(--container-width-sm);
+  }
+}
+/*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+@media screen and (max-width: 420px) {
+  .container {
+    width: var(--container-width-md);
+  }
+}

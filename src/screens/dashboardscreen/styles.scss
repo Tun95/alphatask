@@ -1,0 +1,14 @@
+.dashboard_screen {
+  .dashborad_content {
+    .content {
+      width: 100%;
+      gap: 0;
+      .left {
+        flex: 1;
+      }
+      .right {
+        flex: 5;
+      }
+    }
+  }
+}
