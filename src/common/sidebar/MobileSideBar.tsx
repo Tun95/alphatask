@@ -30,13 +30,16 @@ function MobileSideBar() {
                 PaperProps={{
                   sx: {
                     backgroundColor: "var(--color-white)",
+                    width: "100%",
+                    maxWidth: "100%",
+                    "@media (max-width: 420px)": {
+                      width: "100%",
+                    },
                   },
                 }}
               >
                 <div className="main">
-                  <SideBar
-                    anchor={anchor as Anchor}
-                  />
+                  <SideBar anchor={anchor as Anchor} />
                 </div>
               </Drawer>
             </React.Fragment>

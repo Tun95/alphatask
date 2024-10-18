@@ -136,7 +136,12 @@
   }
   /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
   @media screen and (max-width: 900px) {
+    position: relative;
+
     width: 300px;
+    &.collapsed {
+      width: 300px;
+    }
     .content {
       .logo_icon {
         border-bottom: 1px solid var(--color-border);
@@ -161,6 +166,24 @@
           }
         }
       }
+    }
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 420px) {
+    position: relative;
+    width: 100% !important;
+    &.collapsed {
+      width: 100% !important;
+    }
+  }
+}
+.mobile_side_bar {
+  width: 100%;
+  .side_bar_drawer {
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 420px) {
+      position: relative;
+      width: 100% !important;
     }
   }
 }

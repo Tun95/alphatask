@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 // Define available anchors for the drawer
 export type Anchor = "left" | "right";
@@ -72,8 +72,8 @@ interface ContextProviderProps {
 
 export function ContextProvider({ children }: ContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   const [collapsed, setCollapsed] = useState(false);
+
   // Function to handle drawer toggling
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -87,6 +87,22 @@ export function ContextProvider({ children }: ContextProviderProps) {
       }
       dispatch({ type: "TOGGLE_DRAWER", anchor, open });
     };
+
+  // Effect to manage the collapsed state based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 900) {
+        setCollapsed(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const value: ContextProps = {
     state,

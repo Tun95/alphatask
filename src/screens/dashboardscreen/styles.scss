@@ -57,6 +57,10 @@
         .left {
           .side_menu {
             display: none;
+            width: 300px;
+            &.collapsed {
+              width: 300px;
+            }
           }
         }
         .right {
@@ -73,6 +77,18 @@
               .slider {
                 height: 100%;
               }
+            }
+          }
+        }
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 420px) {
+        .left {
+          .side_menu {
+            position: relative;
+            width: 100% !important;
+            &.collapsed {
+              width: 100% !important;
             }
           }
         }
