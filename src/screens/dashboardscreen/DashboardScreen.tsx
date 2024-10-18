@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import "./styles.scss";
-import NavBar from "../../common/navbar/NavBar";
 import SideBar from "../../common/sidebar/SideBar";
 import Widget from "../../components/dashboard/widgets/Widget";
 import BarChart from "../../components/dashboard/chart/Chart";
@@ -21,6 +20,7 @@ function DashboardScreen() {
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
+
       <div className="dashborad_content">
         <div className="content f_flex">
           <div className="left">
@@ -32,7 +32,15 @@ function DashboardScreen() {
           <div className="right ">
             <div className="nav">
               {" "}
-              <NavBar />
+              <div className="navbar">
+                <div className="">
+                  <div className="content">
+                    <div className="header">
+                      <h2>Welcome! here's your summary</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="widgets">
               <Widget TotalEvent={TotalEvent} type="events" />
