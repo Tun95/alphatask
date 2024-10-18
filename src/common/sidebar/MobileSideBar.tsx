@@ -18,14 +18,14 @@ function MobileSideBar() {
             <React.Fragment key={index}>
               <div
                 className="img"
-                onClick={toggleDrawer(anchor as Anchor, true)} // Open the drawer
+                onClick={() => toggleDrawer(anchor as Anchor, true)} // Open the drawer
               >
                 <img src={menu} alt="side bar" />
               </div>
               <Drawer
                 anchor={anchor as Anchor}
                 open={drawer[anchor as Anchor]} // Access the drawer state based on the anchor
-                onClose={toggleDrawer(anchor as Anchor, false)} // Close the drawer
+                onClose={() => toggleDrawer(anchor as Anchor, false)} // Close the drawer
                 className="side_bar_drawer"
                 PaperProps={{
                   sx: {

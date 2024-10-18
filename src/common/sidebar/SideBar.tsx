@@ -25,6 +25,11 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
   const { toggleDrawer, collapsed, setCollapsed, handleOpenModal } =
     useAppContext();
 
+  //Notification Modal
+  const openModal = () => {
+    handleOpenModal("notification");
+  };
+
   return (
     <>
       {" "}
@@ -39,7 +44,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
             <div className="close_icon l_flex">
               <CloseIcon
                 className="icon"
-                onClick={toggleDrawer(anchor as Anchor, false)}
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
               />
             </div>
           </div>
@@ -66,10 +71,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
             </div>
 
             <div className="bottom">
-              <div
-                className="menu_item"
-                onClick={() => handleOpenModal("notification")}
-              >
+              <div className="menu_item" onClick={openModal}>
                 <NotificationsNoneOutlinedIcon className="icon" />
                 {collapsed && (
                   <span className="dot">
@@ -128,7 +130,6 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
           </div>
         </div>
       </div>
-      
       {/* Notification modal */}
       <NotificationModal />
     </>

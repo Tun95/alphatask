@@ -24,10 +24,7 @@ interface Action {
 export interface ContextProps {
   state: State;
   dispatch: React.Dispatch<Action>;
-  toggleDrawer: (
-    anchor: Anchor,
-    open: boolean
-  ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  toggleDrawer: (anchor: Anchor, open: boolean) => void; // Modified to simplify usage
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -79,20 +76,10 @@ export function ContextProvider({ children }: ContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [collapsed, setCollapsed] = useState(false);
 
-  //SIDEBAR
   // Function to handle drawer toggling
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-      dispatch({ type: "TOGGLE_DRAWER", anchor, open });
-    };
+  const toggleDrawer = (anchor: Anchor, open: boolean) => {
+    dispatch({ type: "TOGGLE_DRAWER", anchor, open });
+  };
 
   // Effect to manage the collapsed state based on screen size
   useEffect(() => {
@@ -110,17 +97,23 @@ export function ContextProvider({ children }: ContextProviderProps) {
     };
   }, []);
 
-  //MUI MODALS
-  //MODAL TOGGLE
+  // MUI MODALS
+  // MODAL TOGGLE
   const [currentModal, setCurrentModal] = useState<
     "notification" | "login" | null
   >(null);
 
   const handleOpenModal = (modal: "notification" | "login") => {
+    // Close any open drawers when opening a modal
+    if (state.drawer.left || state.drawer.right) {
+      toggleDrawer("left", false); // Adjust based on which drawer you want to close
+      toggleDrawer("right", false);
+    }
     setCurrentModal(modal);
   };
+
   const handleCloseModal = () => {
-    console.log("Closing modal"); // Add this line for debugging
+    console.log("Closing modal"); // For debugging
     setCurrentModal(null);
   };
 
