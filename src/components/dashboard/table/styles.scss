@@ -1,0 +1,20 @@
+.table_component {
+  .table_section {
+    .status {
+      border-radius: 20px;
+      padding: 1px 10px;
+      gap: 5px;
+      .icon {
+        font-size: 10px;
+      }
+      &.status_green {
+        color: var(--color-green);
+        background-color: var(--color-gr-bg);
+      }
+      &.status_blue {
+        color: var(--color-blue);
+        background-color: var(--color-bl-bg);
+      }
+    }
+  }
+}

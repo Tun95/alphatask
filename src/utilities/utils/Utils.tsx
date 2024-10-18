@@ -7,6 +7,18 @@ export const formatNumberWithCommas = (num: number): string => {
   return validNumber.toLocaleString();
 };
 
+// Format date in "YYYY-MM-DD" format
+export const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+
+  // Extract year, month, and day
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Pad month with leading zero
+  const day = date.getDate().toString().padStart(2, "0"); // Pad day with leading zero
+
+  return `${year}-${month}-${day}`;
+};
+
 // Custom hook to use the context
 export const useAppContext = () => {
   const context = useContext(Context);

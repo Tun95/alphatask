@@ -1,6 +1,5 @@
 // SideBar.tsx
 import "./styles.scss";
-import { useState } from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import RecordVoiceOverOutlinedIcon from "@mui/icons-material/RecordVoiceOverOutlined";
@@ -22,8 +21,7 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const { toggleDrawer } = useAppContext();
+  const { toggleDrawer, collapsed, setCollapsed } = useAppContext();
 
   return (
     <div className={`side_bar ${collapsed ? "collapsed" : ""}`}>

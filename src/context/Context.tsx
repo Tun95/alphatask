@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState } from "react";
 
 // Define available anchors for the drawer
 export type Anchor = "left" | "right";
@@ -16,8 +16,8 @@ interface State {
 // Define the action types, including both UI and drawer actions
 interface Action {
   type: "DARK_MODE" | "LIGHT_MODE" | "TOGGLE_DRAWER";
-  anchor?: Anchor; 
-  open?: boolean; 
+  anchor?: Anchor;
+  open?: boolean;
 }
 
 // Define the context props for state, dispatch, and toggleDrawer
@@ -28,6 +28,8 @@ export interface ContextProps {
     anchor: Anchor,
     open: boolean
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Create the context with default value
@@ -71,6 +73,7 @@ interface ContextProviderProps {
 export function ContextProvider({ children }: ContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [collapsed, setCollapsed] = useState(false);
   // Function to handle drawer toggling
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -89,6 +92,8 @@ export function ContextProvider({ children }: ContextProviderProps) {
     state,
     dispatch,
     toggleDrawer,
+    collapsed,
+    setCollapsed,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

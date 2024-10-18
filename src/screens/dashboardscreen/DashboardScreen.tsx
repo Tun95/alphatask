@@ -6,8 +6,11 @@ import Widget from "../../components/dashboard/widgets/Widget";
 import BarChart from "../../components/dashboard/chart/Chart";
 import SliderComponent from "../../components/dashboard/slider/Slider";
 import TableComponent from "../../components/dashboard/table/Table";
+import { useAppContext } from "../../utilities/utils/Utils";
 
 function DashboardScreen() {
+  const { collapsed } = useAppContext();
+
   const TotalEvent = 100000;
   const TotalSpeakers = 25;
   const TotalUsers = 300;
@@ -21,7 +24,7 @@ function DashboardScreen() {
       <div className="dashborad_content">
         <div className="content f_flex">
           <div className="left">
-            <div className="side_menu">
+            <div className={`side_menu ${collapsed ? "collapsed" : ""}`}>
               <SideBar anchor="left" />
             </div>
           </div>
@@ -51,7 +54,12 @@ function DashboardScreen() {
               </div>
             </div>
             <div className="table_filters">
-              <TableComponent />
+              <div className="header">
+                <h4>Events History</h4>
+              </div>
+              <div className="table_comp">
+                <TableComponent />
+              </div>
             </div>
           </div>
         </div>

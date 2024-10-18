@@ -5,6 +5,13 @@
       gap: 20px;
       .left {
         flex: 1;
+        .side_menu {
+          position: relative;
+          width: 250px;
+          &.collapsed {
+            width: 70px;
+          }
+        }
       }
       .right {
         padding-right: 20px;

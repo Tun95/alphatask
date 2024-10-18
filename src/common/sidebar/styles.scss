@@ -2,6 +2,9 @@
   width: 250px;
   transition: width 0.3s ease;
   border-right: 1px solid var(--color-border);
+  position: fixed;
+  top: 0;
+  z-index: 1;
   &.collapsed {
     width: 70px;
   }
