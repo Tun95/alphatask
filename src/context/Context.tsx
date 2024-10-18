@@ -16,8 +16,8 @@ interface State {
 // Define the action types, including both UI and drawer actions
 interface Action {
   type: "DARK_MODE" | "LIGHT_MODE" | "TOGGLE_DRAWER";
-  anchor?: Anchor; // Anchor is only required for drawer actions
-  open?: boolean; // Open is only used in drawer actions
+  anchor?: Anchor; 
+  open?: boolean; 
 }
 
 // Define the context props for state, dispatch, and toggleDrawer

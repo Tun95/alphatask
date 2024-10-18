@@ -1,0 +1,58 @@
+.slider_component {
+  position: relative;
+  .slick_slider {
+    position: relative;
+    .slider_card {
+      .slider_content {
+        position: relative;
+        .img {
+          width: 100%;
+          img {
+            width: 100%;
+            border-radius: 8px;
+            height: 360px;
+            object-fit: cover;
+          }
+        }
+        .title_desc {
+          position: absolute;
+          bottom: 30px;
+          color: var(--color-white);
+          padding: 0px 20px;
+        }
+      }
+    }
+  }
+}
+.slick-dots {
+  li {
+    width: 10px; // Default width for non-active dots
+    position: relative;
+    bottom: 30px;
+    &.slick-active {
+      width: 20px; // Adjust width for the active dot
+      button {
+        &::before {
+          font-size: 0;
+          content: "";
+          display: block;
+          width: 20px;
+          height: 4px;
+          background: var(--color-white);
+          border-radius: 2px;
+        }
+      }
+    }
+    button {
+      &::before {
+        font-size: 0;
+        content: "";
+        display: block;
+        width: 10px;
+        height: 4px;
+        background: var(--color-border);
+        border-radius: 2px;
+      }
+    }
+  }
+}

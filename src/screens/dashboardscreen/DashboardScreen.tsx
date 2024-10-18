@@ -3,6 +3,9 @@ import "./styles.scss";
 import NavBar from "../../common/navbar/NavBar";
 import SideBar from "../../common/sidebar/SideBar";
 import Widget from "../../components/dashboard/widgets/Widget";
+import BarChart from "../../components/dashboard/chart/Chart";
+import SliderComponent from "../../components/dashboard/slider/Slider";
+import TableComponent from "../../components/dashboard/table/Table";
 
 function DashboardScreen() {
   const TotalEvent = 100000;
@@ -34,11 +37,22 @@ function DashboardScreen() {
               <Widget TotalUsers={TotalUsers} type="users" />
               <Widget TotalRevenue={TotalRevenue} type="revenue" />
             </div>
-            <div className="chart_slider">
-              <div className="chart"></div>
-              <div className="slider"></div>
+            <div className="chart_slider_section">
+              <div className="header">
+                <h4>Event Registrations per month</h4>
+              </div>
+              <div className="chart_slider ">
+                <div className="bar_chart">
+                  <BarChart />
+                </div>
+                <div className="slider">
+                  <SliderComponent />
+                </div>
+              </div>
             </div>
-            <div className="table_filters"></div>
+            <div className="table_filters">
+              <TableComponent />
+            </div>
           </div>
         </div>
       </div>
