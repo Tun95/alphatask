@@ -30,6 +30,11 @@ export interface ContextProps {
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+
+  // Add the currentModal, handleOpenModal, and handleCloseModal properties
+  currentModal: "notification" | "login" | null;
+  handleOpenModal: (modal: "notification" | "login") => void;
+  handleCloseModal: () => void;
 }
 
 // Create the context with default value
@@ -74,6 +79,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [collapsed, setCollapsed] = useState(false);
 
+  //SIDEBAR
   // Function to handle drawer toggling
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -104,12 +110,30 @@ export function ContextProvider({ children }: ContextProviderProps) {
     };
   }, []);
 
+  //MUI MODALS
+  //MODAL TOGGLE
+  const [currentModal, setCurrentModal] = useState<
+    "notification" | "login" | null
+  >(null);
+
+  const handleOpenModal = (modal: "notification" | "login") => {
+    setCurrentModal(modal);
+  };
+  const handleCloseModal = () => {
+    console.log("Closing modal"); // Add this line for debugging
+    setCurrentModal(null);
+  };
+
   const value: ContextProps = {
     state,
     dispatch,
     toggleDrawer,
     collapsed,
     setCollapsed,
+
+    currentModal,
+    handleOpenModal,
+    handleCloseModal,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

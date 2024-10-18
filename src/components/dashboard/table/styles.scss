@@ -1,5 +1,50 @@
 .table_component {
   .table_section {
+    padding: 0;
+    .ant-table {
+      .ant-table-thead > tr > th {
+        color: var(--color-text-dull);
+        border-bottom: none;
+        background-color: var(-color-border) !important;
+      }
+      .ant-table-tbody > tr > td {
+        border-bottom: none;
+        color: var(--color-dark-gray);
+      }
+    }
+    @media (max-width: 620px) {
+      .ant-table {
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+      }
+      .ant-table-tbody > tr > td {
+        margin-left: -40px;
+
+        text-wrap: nowrap;
+        border-bottom: none;
+      }
+      .ant-table-thead > tr > th {
+        margin-left: -34px;
+      }
+      .ant-table-thead > tr > th:nth-child(3) {
+        right: 45px;
+      }
+      .status_column {
+        position: absolute;
+        right: 0;
+      }
+
+      .event_column {
+        display: flex;
+        justify-content: space-between; // Event Name to the left, Status to the right
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    @media (max-width: 340px) {
+    }
+
     .status {
       border-radius: 20px;
       padding: 1px 10px;
@@ -15,6 +60,12 @@
         color: var(--color-blue);
         background-color: var(--color-bl-bg);
       }
+    }
+    .expanded_content {
+      padding: 0px 20px;
+    }
+    .expand_icons {
+      display: none;
     }
   }
 }
