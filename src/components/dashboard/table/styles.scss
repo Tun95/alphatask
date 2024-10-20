@@ -2,6 +2,7 @@
   .filters_section {
     color: var(--color-primary-dark);
     margin-bottom: 10px;
+
     .left_boxes {
       gap: 10px;
       flex-wrap: wrap;
@@ -22,6 +23,9 @@
       }
       .form_group {
         text-wrap: nowrap;
+      }
+      select {
+        max-width: 120px;
       }
     }
     .right_boxes {
@@ -69,6 +73,9 @@
           select {
             width: 100%;
           }
+        }
+        select {
+          max-width: 100%;
         }
       }
       .right_boxes {
