@@ -27,19 +27,67 @@ function TableComponent() {
   const [dateFilter, setDateFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [speakerFilter, setSpeakerFilter] = useState("");
+  const [filteredData, setFilteredData] = useState<DataType[]>(data);
 
-  const filteredData = data.filter((item) => {
-    const matchesSearch = item.eventName
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesDate = dateFilter ? item.date === dateFilter : true;
-    const matchesStatus = statusFilter ? item.status === statusFilter : true;
-    const matchesSpeaker = speakerFilter
-      ? item.speakers.includes(speakerFilter)
-      : true;
+  //===========================
+  // Create a filtered version of data whenever filters change
+  //===========================
+  useEffect(() => {
+    const tempFilteredData = data.filter((item) => {
+      const matchesSearch = item.eventName
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesDate = dateFilter ? item.date === dateFilter : true;
+      const matchesStatus = statusFilter ? item.status === statusFilter : true;
+      const matchesSpeaker = speakerFilter
+        ? item.speakers.includes(speakerFilter)
+        : true;
 
-    return matchesSearch && matchesDate && matchesStatus && matchesSpeaker;
-  });
+      return matchesSearch && matchesDate && matchesStatus && matchesSpeaker;
+    });
+
+    // Set filteredData based on the current filters
+    setFilteredData(tempFilteredData);
+  }, [searchTerm, dateFilter, statusFilter, speakerFilter]);
+
+  //==============
+  // Sorting logic
+  //==============
+  const handleSortChange = (value: string) => {
+    const sortedData = [...filteredData];
+
+    switch (value) {
+      case "recent":
+        sortedData.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        break;
+      case "name-asc":
+        sortedData.sort((a, b) => a.eventName.localeCompare(b.eventName));
+        break;
+      case "name-desc":
+        sortedData.sort((a, b) => b.eventName.localeCompare(a.eventName));
+        break;
+      case "status":
+        sortedData.sort((a, b) => {
+          const statusOrder: { [key: string]: number } = {
+            Completed: 1,
+            "In Progress": 2,
+          };
+          return (
+            (statusOrder[a.status as keyof typeof statusOrder] || 3) -
+            (statusOrder[b.status as keyof typeof statusOrder] || 3)
+          );
+        });
+        break;
+      default:
+        break;
+    }
+
+    // Update filtered data state if necessary
+    setPagination({ ...pagination, current: 1 });
+    setFilteredData(sortedData);
+  };
 
   const openModal = (record: DataType) => {
     setSelectedEvent(record);
@@ -69,6 +117,35 @@ function TableComponent() {
         ? prevKeys.filter((k) => k !== key)
         : [...prevKeys, key]
     );
+  };
+
+  //=================
+  // EXPORT HANDLER
+  //=================
+  const handleExportCSV = () => {
+    // Prepare CSV data
+    const csvData = filteredData.map((item) => ({
+      EventName: item.eventName,
+      Date: item.date,
+      Status: item.status,
+      Speakers: item.speakers.join(", "),
+    }));
+
+    // Convert to CSV format
+    const csvRows = [
+      Object.keys(csvData[0]).join(","), // Header row
+      ...csvData.map((row) => Object.values(row).join(",")),
+    ];
+    const csvString = csvRows.join("\n");
+
+    // Create a blob and download the CSV file
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "exported_data.csv";
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -136,27 +213,27 @@ function TableComponent() {
               <select
                 name="sort"
                 id="sort"
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (value === "recent") {
-                    filteredData.sort(
-                      (a, b) =>
-                        new Date(b.date).getTime() - new Date(a.date).getTime()
-                    );
-                  }
-                }}
+                onChange={(e) => handleSortChange(e.target.value)}
               >
                 <option value="recent">Most Recent</option>
+                <option value="name-asc">Name A-Z</option>
+                <option value="name-desc">Name Z-A</option>
+                <option value="status">Status (Completed first)</option>
               </select>
             </div>
+
+            {/* EXPORT AS CSV DOWNLOAD */}
             <span className="choose_icon_btn a_flex">
               <div className="form_group">
-                <button className="main_btn download_btn">
-                  <MoreVertIcon className="dounload_icon" />
+                <button className="main_btn dounload_btn a_flex">
+                  <MoreVertIcon className="icon" />
                 </button>
-              </div>
+              </div>{" "}
               <div className="form_group">
-                <button className="main_btn export_btn a_flex">
+                <button
+                  className="main_btn export_btn a_flex"
+                  onClick={handleExportCSV}
+                >
                   <DownloadOutlined className="icon" />
                   <p>Export</p>
                 </button>

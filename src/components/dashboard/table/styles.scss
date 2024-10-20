@@ -52,6 +52,11 @@
       }
       .choose_icon_btn {
         gap: 10px;
+        .dounload_btn {
+          .icon {
+            font-size: 15px;
+          }
+        }
       }
     }
     /*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
