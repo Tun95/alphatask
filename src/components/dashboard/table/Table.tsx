@@ -17,33 +17,45 @@ const { Column } = Table;
 function TableComponent() {
   const { handleOpenModal } = useAppContext();
 
-  const [selectedEvent, setSelectedEvent] = useState<DataType | null>(null); // New state for selected event
+  const [selectedEvent, setSelectedEvent] = useState<DataType | null>(null);
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1,
     pageSize: 5,
   });
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dateFilter, setDateFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [speakerFilter, setSpeakerFilter] = useState("");
+
+  const filteredData = data.filter((item) => {
+    const matchesSearch = item.eventName
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesDate = dateFilter ? item.date === dateFilter : true;
+    const matchesStatus = statusFilter ? item.status === statusFilter : true;
+    const matchesSpeaker = speakerFilter
+      ? item.speakers.includes(speakerFilter)
+      : true;
+
+    return matchesSearch && matchesDate && matchesStatus && matchesSpeaker;
+  });
+
   const openModal = (record: DataType) => {
-    setSelectedEvent(record); // Store the event data
-    handleOpenModal("event"); // Open the modal
+    setSelectedEvent(record);
+    handleOpenModal("event");
   };
 
   const [isMobileView, setIsMobileView] = useState(false);
   const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
 
-  // Update state based on window width
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth <= 620);
     };
 
-    // Initial check
     handleResize();
-
-    // Event listener for window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -52,60 +64,89 @@ function TableComponent() {
   };
 
   const toggleExpand = (key: React.Key) => {
-    setExpandedRowKeys(
-      (prevKeys) =>
-        prevKeys.includes(key)
-          ? prevKeys.filter((k) => k !== key) // collapse
-          : [...prevKeys, key] // expand
+    setExpandedRowKeys((prevKeys) =>
+      prevKeys.includes(key)
+        ? prevKeys.filter((k) => k !== key)
+        : [...prevKeys, key]
     );
   };
 
   return (
     <>
-      {" "}
       <div className="table_component">
         <div className="filters_section c_flex">
           <div className="left_boxes a_flex">
-            <form className="form_group search_box a_flex">
+            <form
+              className="form_group search_box a_flex"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <SearchIcon className="icon" />
-              <input type="search" placeholder="Search..." />
+              <input
+                type="search"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </form>
             <div className="form_group">
-              <input type="date" />
+              <input
+                type="date"
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+              />
             </div>
             <div className="form_group">
-              <select name="status" id="status">
-                <option value="" selected>
-                  Status
-                </option>
-                <option value="completed">completed</option>
-                <option value="inprogress">in progress</option>
+              <select
+                name="status"
+                id="status"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+              >
+                <option value="">Status</option>
+                <option value="Completed">Completed</option>
+                <option value="In Progress">In Progress</option>
               </select>
             </div>
             <div className="form_group">
-              <select name="status" id="status">
-                <option value="" selected>
-                  Name
-                </option>
-                {data.map((item, index) => (
-                  <option value={item.speakers} key={index}>
-                    {item.speakers}
-                  </option>
-                ))}
+              <select
+                name="speakers"
+                id="speakers"
+                value={speakerFilter}
+                onChange={(e) => setSpeakerFilter(e.target.value)}
+              >
+                <option value="">Name</option>
+                {[...new Set(data.flatMap((item) => item.speakers))].map(
+                  (speaker, index) => (
+                    <option value={speaker} key={index}>
+                      {speaker}
+                    </option>
+                  )
+                )}
               </select>
             </div>
             <div className="count_list">
               <h5>
-                Displaying <span>100</span> results
+                Displaying <span>{filteredData.length}</span> results
               </h5>
             </div>
           </div>
           <div className="right_boxes a_flex">
             <div className="form_group sort a_flex">
-              <label htmlFor="status">Sort:</label>
-              <select name="status" id="status">
+              <label htmlFor="sort">Sort:</label>
+              <select
+                name="sort"
+                id="sort"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === "recent") {
+                    filteredData.sort(
+                      (a, b) =>
+                        new Date(b.date).getTime() - new Date(a.date).getTime()
+                    );
+                  }
+                }}
+              >
                 <option value="recent">Most Recent</option>
-                <option value="inprogress">in progress</option>
               </select>
             </div>
             <span className="choose_icon_btn a_flex">
@@ -125,7 +166,7 @@ function TableComponent() {
         </div>
         <div className="table_section">
           <Table<DataType>
-            dataSource={data}
+            dataSource={filteredData}
             className="table"
             pagination={{
               ...pagination,
@@ -141,7 +182,7 @@ function TableComponent() {
                     expandedRowRender: (record) => (
                       <div className="expanded_content">
                         <div className="exp_content c_flex">
-                          <p>{record.speakers}</p>
+                          <p>{record.speakers.join(", ")}</p>
                           <p>{formatDate(record.date)}</p>
                         </div>
                       </div>
@@ -211,7 +252,7 @@ function TableComponent() {
                   title="Speakers"
                   dataIndex="speakers"
                   key="speakers"
-                  render={(speakers: string[]) => speakers[0]} // Display the first speaker only
+                  render={(speakers: string[]) => speakers.join(", ")} // Display all speakers
                 />
               </>
             )}
@@ -236,7 +277,6 @@ function TableComponent() {
           </Table>
         </div>
       </div>
-      {/* Event Details Modal modal */}
       <EventDetailsModal event={selectedEvent} />
     </>
   );

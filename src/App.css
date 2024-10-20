@@ -104,6 +104,9 @@ button {
 input::placeholder {
   color: var(--color-primary);
 }
+[type="search"]::-webkit-search-cancel-button {
+  color: var(--color-primary-dark);
+}
 select {
   padding: 7px 10px;
 }
