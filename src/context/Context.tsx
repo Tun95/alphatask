@@ -29,8 +29,8 @@ export interface ContextProps {
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 
   // Add the currentModal, handleOpenModal, and handleCloseModal properties
-  currentModal: "notification" | "login" | null;
-  handleOpenModal: (modal: "notification" | "login") => void;
+  currentModal: "event" | "login" | null;
+  handleOpenModal: (modal: "event" | "login") => void;
   handleCloseModal: () => void;
 }
 
@@ -100,10 +100,10 @@ export function ContextProvider({ children }: ContextProviderProps) {
   // MUI MODALS
   // MODAL TOGGLE
   const [currentModal, setCurrentModal] = useState<
-    "notification" | "login" | null
+    "event" | "login" | null
   >(null);
 
-  const handleOpenModal = (modal: "notification" | "login") => {
+  const handleOpenModal = (modal: "event" | "login") => {
     // Close any open drawers when opening a modal
     if (state.drawer.left || state.drawer.right) {
       toggleDrawer("left", false); // Adjust based on which drawer you want to close

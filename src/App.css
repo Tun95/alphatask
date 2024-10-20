@@ -22,6 +22,7 @@
   --color-gr-bg: #d1fae5;
   --color-blue: #3b82f6;
   --color-bl-bg: #dbeafe;
+  --color-gray-bg: #f8fafc;
   --transition: all 400ms ease;
   --light-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
   --container-width-lg: 85%;
@@ -83,6 +84,28 @@ body {
 .p_flex {
   display: flex;
   justify-content: center;
+}
+
+input,
+button,
+select {
+  outline: none;
+  background: transparent;
+  border: 2px solid var(--color-border);
+  color: var(--color-primary-dark);
+}
+input,
+button {
+  padding: 9px 10px;
+}
+button {
+  cursor: pointer;
+}
+input::placeholder {
+  color: var(--color-primary);
+}
+select {
+  padding: 7px 10px;
 }
 
 /*----- control btn -------*/

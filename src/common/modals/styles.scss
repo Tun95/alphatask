@@ -7,157 +7,144 @@
   background-color: #ffffff;
   // box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  border-radius: 10px;
+
   outline: none;
   height: 100%;
   .drawer_close_icon {
     position: absolute;
     top: 20px;
     right: 20px;
-    color: var(--color-gray);
+    color: var(--color-primary);
     cursor: pointer;
     .icon {
-      font-size: 18px;
+      font-size: 15px;
     }
   }
-  .header_box {
-    height: 100% !important;
-    margin-top: 40px;
-    padding-bottom: 60px;
-    .menu_header {
-      width: 100% !important;
-      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-      @media (max-width: 420px) {
-        padding: 10px 20px !important;
-      }
-    }
-    .form_box {
-      .inner_form {
-        .grid_form {
-          .form_group {
-            .eye_span {
-              position: relative;
-              width: 100%;
-              .eye_icon {
-                position: absolute;
-                right: 15px;
-                bottom: 14px;
-                color: var(--color-dark-gray);
-              }
-            }
-
-            /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-            @media (max-width: 745px) {
-              .eye_span {
-                .eye_icon {
-                  bottom: 8px;
-                }
-              }
-              input {
-                padding: 10px !important;
-              }
-              .select {
-                padding: 10px !important;
-              }
-            }
-          }
-        }
-      }
-      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-      @media (max-width: 420px) {
-        padding: 10px 20px !important;
-      }
-    }
-    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-    @media (max-width: 575px) {
-      .form_box {
-        .inner_form {
-          .grid_form {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      }
-    }
-  }
-  // .onClick_span {
-  //   cursor: pointer;
-  // }
 }
-.bill_modal_drawer {
-  .bills_menu_modal {
-    width: 390px;
-    height: 300px;
+.event_modal_drawer {
+  position: relative;
+  .events_menu_modal {
+    width: 500px;
+    height: 380px;
+    position: relative;
     .drawer_close_icon {
       .span_icon {
-        width: 26px;
-        height: 26px;
-        background-color: var(--color-yea-progress);
+        width: 23px;
+        height: 23px;
         color: var(--color-primary);
         border-radius: 50%;
+        border: 1px solid var(--color-border);
       }
     }
     .header_box {
-      text-align: center;
-
-      padding: 20px 40px;
-      padding-top: 10px;
-      .header,
-      .text {
-        margin-bottom: 20px;
-        color: var(--color-dark-gray);
-      }
-      .btn {
-        .main_btn {
-          border-radius: 30px;
-          font-size: 15px;
+      padding: 20px;
+      .header {
+        .name {
+          color: var(--color-dark-gray);
         }
-        .reg_confirm_btn {
-          margin-bottom: 10px;
-          .main_btn {
-            padding: 13px 20px;
-            width: 100%;
-          }
+        .date {
+          margin: 10px 0px;
+          color: var(--color-text-dull);
         }
-        .login_btn {
-          .main_btn {
-            padding: 13px 20px;
-            width: 70%;
-            background-color: var(--color-dark);
-          }
-        }
-      }
-      .confirm_cancel {
-        width: 100%;
-        column-gap: 10px;
-        align-items: last baseline;
-        .reg_confirm_btn,
-        .cancel__btn {
-          width: 100%;
-          .main_btn {
-            width: 100%;
-            font-size: 15px;
-            padding: 13px 20px;
-          }
-        }
-        .cancel__btn {
-          .main_btn {
-            background: transparent;
-            color: var(--color-dark);
-            border: 1px solid var(--color-dark);
-          }
+        .description {
+          margin-bottom: 30px;
+          color: var(--color-primary-dark);
         }
       }
     }
+    .speaker {
+      color: var(--color-primary-dark);
+      margin-top: 60px;
+      .img {
+        margin-bottom: 10px;
+        position: relative;
 
-    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-    @media screen and (max-width: 745px) {
-      .drawer_close_icon {
-        display: none;
+        .speaker_img {
+          margin-left: -15px;
+          z-index: 0;
+        }
+
+        .speaker_img:first-child {
+          margin-left: 0;
+          z-index: 3;
+        }
+        .speaker_img:nth-child(2) {
+          z-index: 1;
+        }
+
+        .speaker_img:hover {
+          z-index: 10;
+        }
       }
-      .header_box {
-        .btn {
-          .login_btn {
-            .main_btn {
+      .sp_list {
+        small {
+          flex-wrap: wrap;
+          .count {
+            margin-right: 5px;
+          }
+          .sp {
+            gap: 10px;
+          }
+        }
+      }
+      .attendees {
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+    .btns {
+      position: absolute;
+      width: 100%;
+      background-color: var(--color-gray-bg);
+      padding: 20px;
+      margin-top: 5px;
+      z-index: 1;
+      bottom: 0;
+      button {
+        border: none;
+        font-size: 15px;
+        padding: 10px 15px;
+        text-wrap: nowrap;
+      }
+      .btn_section {
+        width: 100%;
+        .edit {
+          width: 100%;
+          .edit_btn {
+            border: 2px solid var(--color-border);
+            background-color: var(--color-white);
+          }
+        }
+        .delete_mark_btn {
+          gap: 10px;
+          width: 100%;
+          .delete {
+            width: 100%;
+            .delete_btn {
+              background-color: var(--color-red);
+              color: var(--color-white);
+            }
+          }
+          .mark {
+            width: 100%;
+            .mark_btn {
+              color: var(--color-white);
+              background-color: var(--color-text);
+            }
+          }
+        }
+        /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+        @media screen and (max-width: 345px) {
+          flex-direction: column;
+          gap: 10px;
+          .edit_btn {
+            width: 100%;
+          }
+          .delete_mark_btn {
+            flex-direction: column;
+            .delete_btn,
+            .mark_btn {
               width: 100%;
             }
           }
@@ -165,14 +152,12 @@
       }
     }
     /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
-    @media screen and (max-width: 450px) {
-      width: 90%;
-      height: fit-content;
-      .header_box {
-        .btn {
-          padding-bottom: 30px;
-        }
-      }
+    @media screen and (max-width: 500px) {
+      width: 100%;
+    }
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 345px) {
+      height: 100%;
     }
   }
 }

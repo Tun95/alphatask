@@ -1,4 +1,88 @@
 .table_component {
+  .filters_section {
+    color: var(--color-primary-dark);
+    margin-bottom: 10px;
+    .left_boxes {
+      gap: 10px;
+      flex-wrap: wrap;
+      .search_box {
+        position: relative;
+        .icon {
+          position: absolute;
+          left: 10px;
+          color: var(--color-primary);
+          font-size: 20px;
+          cursor: pointer;
+        }
+        input {
+          width: 100%;
+          padding-left: 35px;
+          color: var(--color-text-dull);
+        }
+      }
+      .form_group {
+        text-wrap: nowrap;
+      }
+    }
+    .right_boxes {
+      gap: 10px;
+      .form_group {
+        .download_btn {
+          padding: 6px 8px;
+          .dounload_icon {
+            font-size: 16px;
+            padding: 0px;
+          }
+        }
+        .export_btn {
+          padding: 8px 10px;
+          gap: 4px;
+        }
+      }
+      .sort {
+        gap: 10px;
+        label {
+          font-weight: 300;
+          font-size: 15px;
+        }
+      }
+      .choose_icon_btn {
+        gap: 10px;
+      }
+    }
+    /*======= MEDIA QUERIES (MEDIUM DEVICES) =======*/
+    @media screen and (max-width: 1300px) {
+      flex-direction: column;
+      //justify-content: flex-start;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+    @media screen and (max-width: 420px) {
+      .left_boxes {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        .form_group {
+          width: 100%;
+          input,
+          select {
+            width: 100%;
+          }
+        }
+      }
+      .right_boxes {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        .sort,
+        .choose_icon_btn {
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
+    }
+  }
   .table_section {
     padding: 0;
     .ant-table {
@@ -28,11 +112,12 @@
         margin-left: -34px;
       }
       .ant-table-thead > tr > th:nth-child(3) {
-        right: 45px;
+        right: 0px;
       }
       .status_column {
-        position: absolute;
+        position: relative;
         right: 0;
+        width: 100px !important;
       }
 
       .event_column {
@@ -49,6 +134,7 @@
       border-radius: 20px;
       padding: 1px 10px;
       gap: 5px;
+
       .icon {
         font-size: 10px;
       }

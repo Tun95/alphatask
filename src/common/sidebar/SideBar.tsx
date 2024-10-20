@@ -15,20 +15,13 @@ import { CommentOutlined, SettingOutlined } from "@ant-design/icons";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppContext } from "../../utilities/utils/Utils";
 import { Anchor } from "../../context/Context";
-import { NotificationModal } from "../modals/Modals";
 
 interface SideBarProps {
   anchor: Anchor;
 }
 
 const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
-  const { toggleDrawer, collapsed, setCollapsed, handleOpenModal } =
-    useAppContext();
-
-  //Notification Modal
-  const openModal = () => {
-    handleOpenModal("notification");
-  };
+  const { toggleDrawer, collapsed, setCollapsed } = useAppContext();
 
   return (
     <>
@@ -71,7 +64,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
             </div>
 
             <div className="bottom">
-              <div className="menu_item" onClick={openModal}>
+              <div className="menu_item">
                 <NotificationsNoneOutlinedIcon className="icon" />
                 {collapsed && (
                   <span className="dot">
@@ -130,8 +123,6 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
           </div>
         </div>
       </div>
-      {/* Notification modal */}
-      <NotificationModal />
     </>
   );
 };
