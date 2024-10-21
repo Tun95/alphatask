@@ -135,7 +135,7 @@ function TableComponent() {
 
     // Convert to CSV format
     const csvRows = [
-      Object.keys(csvData[0]).join(","), // Header row
+      Object.keys(csvData[0]).join(","),
       ...csvData.map((row) => Object.values(row).join(",")),
     ];
     const csvString = csvRows.join("\n");
