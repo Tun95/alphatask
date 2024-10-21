@@ -54,7 +54,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item"> Home</span>}
               </Link>
               <Link
-                to="/"
+                to="/events"
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
@@ -62,7 +62,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item"> Events</span>}
               </Link>
               <Link
-                to="/"
+                to="/speakers"
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
@@ -70,7 +70,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item"> Speakers</span>}
               </Link>
               <Link
-                to="/"
+                to="/reports"
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
@@ -100,7 +100,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 </div>
               </div>
               <Link
-                to="/"
+                to="/messages"
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
@@ -108,7 +108,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item"> Messages</span>}
               </Link>
               <Link
-                to="/"
+                to="/settings"
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
