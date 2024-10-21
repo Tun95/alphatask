@@ -86,6 +86,10 @@ body {
   justify-content: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 input,
 button,
 select {

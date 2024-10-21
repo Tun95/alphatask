@@ -1,4 +1,3 @@
-// SideBar.tsx
 import "./styles.scss";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
@@ -15,6 +14,7 @@ import { CommentOutlined, SettingOutlined } from "@ant-design/icons";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAppContext } from "../../utilities/utils/Utils";
 import { Anchor } from "../../context/Context";
+import { Link } from "react-router-dom";
 
 interface SideBarProps {
   anchor: Anchor;
@@ -45,22 +45,38 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
           {/* Menu items */}
           <div className="menu">
             <div className="top">
-              <div className="menu_item">
+              <Link
+                to="/"
+                className="menu_item "
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <HomeOutlinedIcon className="icon" />
                 {!collapsed && <span className="list_item"> Home</span>}
-              </div>
-              <div className="menu_item">
+              </Link>
+              <Link
+                to="/"
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <CalendarMonthOutlinedIcon className="icon" />
                 {!collapsed && <span className="list_item"> Events</span>}
-              </div>
-              <div className="menu_item">
+              </Link>
+              <Link
+                to="/"
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <RecordVoiceOverOutlinedIcon className="icon" />
                 {!collapsed && <span className="list_item"> Speakers</span>}
-              </div>
-              <div className="menu_item">
+              </Link>
+              <Link
+                to="/"
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <ArticleOutlinedIcon className="icon" />
                 {!collapsed && <span className="list_item"> Reports</span>}
-              </div>
+              </Link>
             </div>
 
             <div className="bottom">
@@ -83,14 +99,22 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                   )}
                 </div>
               </div>
-              <div className="menu_item">
+              <Link
+                to="/"
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <CommentOutlined className="icon" />
                 {!collapsed && <span className="list_item"> Messages</span>}
-              </div>
-              <div className="menu_item">
+              </Link>
+              <Link
+                to="/"
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <SettingOutlined className="icon" />
                 {!collapsed && <span className="list_item"> Settings</span>}
-              </div>
+              </Link>
 
               {/* Collapse/Expand functionality */}
               <div
