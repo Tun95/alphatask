@@ -102,8 +102,9 @@ const Widget: React.FC<WidgetProps> = ({
           </span>
           <span className="percentage_section">
             <div
-              className="percentage a_flex"
-              style={{ color: data.isIncrease ? "green" : "red" }}
+              className={`percentage a_flex ${
+                data.isIncrease ? "increase" : "decrease"
+              }`}
             >
               {data.isIncrease ? (
                 <CallMadeOutlinedIcon className="percentage_icon" />

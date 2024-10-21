@@ -3,17 +3,20 @@ import { createContext, useEffect, useReducer, useState } from "react";
 // Define available anchors for the drawer
 export type Anchor = "left" | "right";
 
+// Define the state interface
 interface State {
   loading: boolean;
   error: string;
+  theme: "light" | "dark"; // Add theme state
   drawer: {
     left: boolean;
     right: boolean;
   };
 }
 
+// Define the action types, including theme and drawer actions
 interface Action {
-  type: "DARK_MODE" | "LIGHT_MODE" | "TOGGLE_DRAWER";
+  type: "TOGGLE_THEME" | "TOGGLE_DRAWER";
   anchor?: Anchor;
   open?: boolean;
 }
@@ -30,15 +33,19 @@ export interface ContextProps {
   currentModal: "event" | "login" | null;
   handleOpenModal: (modal: "event" | "login") => void;
   handleCloseModal: () => void;
+
+  // Use a single function to toggle between light and dark modes
+  toggleTheme: () => void;
 }
 
-// Create the context with default value
+// Create the context with a default value
 export const Context = createContext<ContextProps | undefined>(undefined);
 
 // INITIAL STATE
 const initialState: State = {
   loading: true,
   error: "",
+  theme: "light", // Default to light theme
   drawer: {
     left: false,
     right: false,
@@ -47,11 +54,14 @@ const initialState: State = {
 
 // Define the reducer function
 function reducer(state: State, action: Action): State {
+  const newTheme = state.theme === "light" ? "dark" : "light";
   switch (action.type) {
-    case "DARK_MODE":
-      return { ...state, loading: false };
-    case "LIGHT_MODE":
-      return { ...state, loading: false };
+    case "TOGGLE_THEME":
+      localStorage.setItem("theme", newTheme); 
+      return {
+        ...state,
+        theme: newTheme,
+      };
     case "TOGGLE_DRAWER":
       if (action.anchor) {
         return {
@@ -74,12 +84,37 @@ export function ContextProvider({ children }: ContextProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [collapsed, setCollapsed] = useState(false);
 
+  // Load theme from localStorage on initial load
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark";
+    if (savedTheme) {
+      dispatch({ type: "TOGGLE_THEME" }); // Set the theme based on localStorage
+    }
+  }, []);
+
+  // Effect to manage global theme styles
+  useEffect(() => {
+    const root = document.documentElement;
+
+    // Apply theme by toggling 'dark' class on the root element
+    if (state.theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, [state.theme]); // Re-run when theme changes
+
   // Function to handle drawer toggling
   const toggleDrawer = (anchor: Anchor, open: boolean) => {
     dispatch({ type: "TOGGLE_DRAWER", anchor, open });
   };
 
-  // Effect to manage the collapsed state based on screen size
+  // Single function to toggle between light and dark modes
+  const toggleTheme = () => {
+    dispatch({ type: "TOGGLE_THEME" });
+  };
+
+  // Handle screen resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 900) {
@@ -95,14 +130,12 @@ export function ContextProvider({ children }: ContextProviderProps) {
     };
   }, []);
 
-  // MUI MODALS
-  // MODAL TOGGLE
+  // Modal state and logic (as per your original setup)
   const [currentModal, setCurrentModal] = useState<"event" | "login" | null>(
     null
   );
 
   const handleOpenModal = (modal: "event" | "login") => {
-    // Close any open drawers when opening a modal
     if (state.drawer.left || state.drawer.right) {
       toggleDrawer("left", false);
       toggleDrawer("right", false);
@@ -111,7 +144,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
   };
 
   const handleCloseModal = () => {
-    console.log("Closing modal");
     setCurrentModal(null);
   };
 
@@ -121,10 +153,10 @@ export function ContextProvider({ children }: ContextProviderProps) {
     toggleDrawer,
     collapsed,
     setCollapsed,
-
     currentModal,
     handleOpenModal,
     handleCloseModal,
+    toggleTheme, 
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

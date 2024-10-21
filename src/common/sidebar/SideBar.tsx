@@ -21,7 +21,8 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
-  const { toggleDrawer, collapsed, setCollapsed } = useAppContext();
+  const { toggleDrawer, collapsed, setCollapsed, toggleTheme } =
+    useAppContext();
 
   return (
     <>
@@ -80,7 +81,10 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
             </div>
 
             <div className="bottom">
-              <div className="menu_item">
+              <div
+                className="menu_item"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+              >
                 <NotificationsNoneOutlinedIcon className="icon" />
                 {collapsed && (
                   <span className="dot">
@@ -129,9 +133,16 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item"> Collapse</span>}
               </div>
 
-              <div className="menu_item dark_mode">
-                <Switch size="small" defaultChecked className="switch" />
-                {!collapsed && <span className="list_item"> Dark mode</span>}
+              {/* THEME SWITCH */}
+              {/* THEME SWITCH */}
+              <div className="menu_item dark_mode" onClick={toggleTheme}>
+                <Switch
+                  size="small"
+                  checked={localStorage.getItem("theme") === "dark"} // Check theme from localStorage
+                  className="switch"
+                  onChange={() => toggleTheme()}
+                />
+                {!collapsed && <span className="list_item">Dark mode</span>}
               </div>
 
               <div className="menu_item user_info">

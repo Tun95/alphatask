@@ -109,10 +109,11 @@
   .table_section {
     padding: 0;
     .ant-table {
+      background-color: var(--color-white);
       .ant-table-thead > tr > th {
         color: var(--color-text-dull);
         border-bottom: none;
-        background-color: var(-color-border) !important;
+        background-color: var(--color-border);
       }
       .ant-table-tbody > tr > td {
         border-bottom: none;
@@ -198,8 +199,8 @@
 
 /* Pagination active number styles */
 .table .ant-pagination-item-active {
-  background-color: var(--color-text); 
-  border-radius: 50% !important; 
+  background-color: var(--color-text);
+  border-radius: 50% !important;
   border: none;
   width: 30px !important;
   height: 32px !important;
@@ -214,7 +215,6 @@
 .table .ant-pagination-item-active a {
   color: var(--color-white) !important;
 }
-
 
 .table .ant-pagination-item-active:hover,
 .table .ant-pagination-item-active:focus {

@@ -44,6 +44,12 @@
         .percentage_icon {
           font-size: 15px;
         }
+        &.increase {
+          color: var(--color-green);
+        }
+        &.decrease {
+          color: var(--color-red);
+        }
       }
     }
     .icon {
