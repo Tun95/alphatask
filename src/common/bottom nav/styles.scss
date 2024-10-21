@@ -1,0 +1,36 @@
+.bottom_nav {
+  display: none;
+
+  .menu_icon {
+    font-size: 24px !important;
+  }
+  .icon {
+    color: var(--color-text-dull) !important;
+  }
+  .MuiBottomNavigationAction-iconOnly {
+    color: var(--color-text-dull) !important;
+  }
+  .MuiBottomNavigationAction-label {
+    color: var(--color-text-dull);
+    border: 0px;
+  }
+
+  .Mui-selected {
+    color: var(--color-text) !important;
+    border-top: 2px solid var(--color-text);
+  }
+
+  .Mui-selected .MuiBottomNavigationAction-label {
+    border-top: 0px;
+  }
+
+  @media screen and (max-width: 745px) {
+    display: block;
+  }
+  /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+  @media screen and (max-width: 360px) {
+    .menus_profile {
+      display: none;
+    }
+  }
+}

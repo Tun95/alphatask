@@ -30,6 +30,12 @@
   --container-width-sm: 96%;
 }
 
+.dark {
+  --color-bg: #121212; /* Dark mode background */
+  --color-text: #ffffff; /* Dark mode text color */
+  /* Add other dark mode variables as needed */
+}
+
 html {
   scroll-behavior: smooth;
 }

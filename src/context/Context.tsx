@@ -3,7 +3,6 @@ import { createContext, useEffect, useReducer, useState } from "react";
 // Define available anchors for the drawer
 export type Anchor = "left" | "right";
 
-// Define the state interface, combining loading/error and drawer state
 interface State {
   loading: boolean;
   error: string;
@@ -13,7 +12,6 @@ interface State {
   };
 }
 
-// Define the action types, including both UI and drawer actions
 interface Action {
   type: "DARK_MODE" | "LIGHT_MODE" | "TOGGLE_DRAWER";
   anchor?: Anchor;
@@ -24,7 +22,7 @@ interface Action {
 export interface ContextProps {
   state: State;
   dispatch: React.Dispatch<Action>;
-  toggleDrawer: (anchor: Anchor, open: boolean) => void; // Modified to simplify usage
+  toggleDrawer: (anchor: Anchor, open: boolean) => void;
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -99,21 +97,21 @@ export function ContextProvider({ children }: ContextProviderProps) {
 
   // MUI MODALS
   // MODAL TOGGLE
-  const [currentModal, setCurrentModal] = useState<
-    "event" | "login" | null
-  >(null);
+  const [currentModal, setCurrentModal] = useState<"event" | "login" | null>(
+    null
+  );
 
   const handleOpenModal = (modal: "event" | "login") => {
     // Close any open drawers when opening a modal
     if (state.drawer.left || state.drawer.right) {
-      toggleDrawer("left", false); // Adjust based on which drawer you want to close
+      toggleDrawer("left", false);
       toggleDrawer("right", false);
     }
     setCurrentModal(modal);
   };
 
   const handleCloseModal = () => {
-    console.log("Closing modal"); // For debugging
+    console.log("Closing modal");
     setCurrentModal(null);
   };
 
