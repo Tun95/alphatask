@@ -92,6 +92,14 @@
           font-size: 15px;
         }
       }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 450px) {
+        margin-top: 30px;
+      }
+      /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+      @media screen and (max-width: 345px) {
+        margin-top: 60px;
+      }
     }
     .btns {
       position: absolute;
