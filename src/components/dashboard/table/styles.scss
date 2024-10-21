@@ -178,3 +178,66 @@
     }
   }
 }
+
+/* Pagination styles */
+// .table .ant-pagination {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 100%;
+// }
+
+.table .ant-pagination-item {
+  border-radius: 50% !important;
+  color: var(--color-white) !important;
+  width: 30px !important;
+  height: 32px !important;
+  margin: 0px 5px;
+  padding: 0px;
+}
+
+/* Pagination active number styles */
+.table .ant-pagination-item-active {
+  background-color: var(--color-text); 
+  border-radius: 50% !important; 
+  border: none;
+  width: 30px !important;
+  height: 32px !important;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px;
+}
+
+.table .ant-pagination-item-active a {
+  color: var(--color-white) !important;
+}
+
+
+.table .ant-pagination-item-active:hover,
+.table .ant-pagination-item-active:focus {
+  background-color: #6d5ce7 !important;
+  color: var(--color-white) !important;
+}
+
+.pagination-icon {
+  border: 1px solid var(--color-border);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.ant-pagination-options .ant-select-selector {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ant-select-dropdown .ant-select-item-option-content:before {
+  content: "Show: ";
+  font-weight: 600;
+  margin-right: 5px;
+}

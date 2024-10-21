@@ -109,4 +109,14 @@ export const data: DataType[] = [
     description:
       "A forum on the advancements in quantum computing and its potential impact on various industries.",
   },
+  {
+    key: "11",
+    eventName: "Computing Forum",
+    date: "2024-03-18",
+    speakers: ["Ethan Clark", "Laura Johnson"],
+    status: "Completed",
+    attendees: 150,
+    description:
+      "A forum in quantum computing and its potential impact on various industries.",
+  },
 ];

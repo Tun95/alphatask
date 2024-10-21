@@ -11,6 +11,8 @@ import { EventDetailsModal } from "../../../common/modals/Modals";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import { DownloadOutlined } from "@ant-design/icons";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const { Column } = Table;
 
@@ -20,7 +22,7 @@ function TableComponent() {
   const [selectedEvent, setSelectedEvent] = useState<DataType | null>(null);
   const [pagination, setPagination] = useState<TablePaginationConfig>({
     current: 1,
-    pageSize: 5,
+    pageSize: 10,
   });
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -260,10 +262,30 @@ function TableComponent() {
             pagination={{
               ...pagination,
               showSizeChanger: true,
-              pageSizeOptions: ["5", "10", "20"],
-              position: ["bottomLeft"],
-              showTotal: (total) => `Total ${total} items`,
+              pageSizeOptions: ["10", "20"],
+              position: ["bottomLeft"], // Pagination at the bottom left
+              itemRender: (_, type, originalElement) => {
+                if (type === "prev") {
+                  return (
+                    <a className="pagination-icon l_flex">
+                      <NavigateBeforeIcon className="pag_icon" />
+                    </a>
+                  );
+                }
+                if (type === "next") {
+                  return (
+                    <a className="pagination-icon l_flex">
+                      <NavigateNextIcon className="pag_icon" />
+                    </a>
+                  );
+                }
+                return originalElement;
+              },
+              locale: {
+                items_per_page: "",
+              },
             }}
+            
             onChange={handleTableChange}
             expandable={
               isMobileView
