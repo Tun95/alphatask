@@ -4,12 +4,44 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   // box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-
+  color: var(--color-primary-dark);
   outline: none;
   height: 100%;
+  &.drawer_modal_dark {
+    .drawer_close_icon {
+      .span_icon {
+        background-color: var(--color-text-txt) !important;
+        border-radius: 50%;
+        border: 0px !important;
+      }
+    }
+    .header_box,
+    .speaker {
+      color: var(--color-text) !important;
+    }
+    .header_box {
+      .description {
+        color: var(--color-text) !important;
+      }
+    }
+    .btns {
+      background-color: var(--color-text-txt) !important;
+      .edit_btn {
+        background-color: var(--color-text) !important;
+        border: none !important;
+      }
+      .delete_btn {
+        color: var(--color-text) !important;
+      }
+      .mark_btn {
+        color: var(--color-text) !important;
+        background-color: var(--color-hover-bg) !important;
+      }
+    }
+  }
   .drawer_close_icon {
     position: absolute;
     top: 20px;
@@ -122,6 +154,7 @@
           .edit_btn {
             border: 2px solid var(--color-border);
             background-color: var(--color-white);
+            color: var(--color-primary-dark);
           }
         }
         .delete_mark_btn {

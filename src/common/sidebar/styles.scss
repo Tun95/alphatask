@@ -5,6 +5,7 @@
   position: fixed;
   top: 0;
   z-index: 1;
+  overflow: hidden;
   &.collapsed {
     width: 70px;
   }
@@ -41,6 +42,12 @@
           font-size: 13px;
           color: var(--color-dark-gray);
         }
+        &.close_icon_dark {
+          background-color: var(--color-text);
+          .icon {
+            color: var(--color-primary);
+          }
+        }
       }
     }
 
@@ -66,6 +73,9 @@
           font-size: 22px;
           position: relative;
           right: 4px;
+          &.icon_dark {
+            color: var(--color-text-txt);
+          }
         }
         .dot {
           position: relative;
@@ -84,6 +94,11 @@
             border-radius: 50%;
             background-color: var(--color-red);
             color: var(--color-white);
+            .count {
+              &.count_dark {
+                color: var(--color-text);
+              }
+            }
           }
         }
         &:hover {
@@ -179,6 +194,7 @@
 }
 .mobile_side_bar {
   width: 100%;
+
   .side_bar_drawer {
     /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
     @media screen and (max-width: 420px) {

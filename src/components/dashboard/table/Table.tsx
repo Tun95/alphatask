@@ -17,7 +17,9 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const { Column } = Table;
 
 function TableComponent() {
-  const { handleOpenModal } = useAppContext();
+  const { state, handleOpenModal } = useAppContext();
+
+  const { theme } = state;
 
   const [selectedEvent, setSelectedEvent] = useState<DataType | null>(null);
   const [pagination, setPagination] = useState<TablePaginationConfig>({
@@ -153,7 +155,11 @@ function TableComponent() {
   return (
     <>
       <div className="table_component">
-        <div className="filters_section c_flex">
+        <div
+          className={`filters_section c_flex ${
+            theme === "dark" && "filters_section_dark"
+          }`}
+        >
           <div className="left_boxes a_flex">
             <form
               className="form_group search_box a_flex"
@@ -255,10 +261,14 @@ function TableComponent() {
             </span>
           </div>
         </div>
-        <div className="table_section">
+        <div
+          className={`table_section ${
+            theme === "dark" && "table_section_dark"
+          }`}
+        >
           <Table<DataType>
             dataSource={filteredData}
-            className="table"
+            className={`table `}
             pagination={{
               ...pagination,
               showSizeChanger: true,
@@ -285,7 +295,6 @@ function TableComponent() {
                 items_per_page: "",
               },
             }}
-            
             onChange={handleTableChange}
             expandable={
               isMobileView
@@ -322,7 +331,7 @@ function TableComponent() {
               title="Event Name"
               dataIndex="eventName"
               key="eventName"
-              className="event_column"
+              className="columns event_column"
               render={(text, record: DataType) =>
                 isMobileView ? (
                   <div
@@ -357,18 +366,20 @@ function TableComponent() {
                   title="Date"
                   dataIndex="date"
                   key="date"
+                  className="columns"
                   render={(date: string) => formatDate(date)}
                 />
                 <Column
                   title="Speakers"
                   dataIndex="speakers"
                   key="speakers"
+                  className="columns"
                   render={(speakers: string[]) => speakers[0]}
                 />
               </>
             )}
             <Column
-              className="status_column"
+              className="columns status_column"
               title="Status"
               dataIndex="status"
               key="status"

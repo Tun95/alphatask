@@ -7,8 +7,8 @@ import { useAppContext } from "../../utilities/utils/Utils";
 import { Anchor } from "../../context/Context";
 
 function MobileSideBar() {
-  const { state, toggleDrawer } = useAppContext(); // Access state and toggleDrawer
-  const { drawer } = state; // Destructure the drawer from state
+  const { state, toggleDrawer } = useAppContext();
+  const { drawer } = state;
 
   return (
     <div className="mobile_side_bar">
@@ -18,14 +18,15 @@ function MobileSideBar() {
             <React.Fragment key={index}>
               <div
                 className="img"
-                onClick={() => toggleDrawer(anchor as Anchor, true)} // Open the drawer
+                onClick={() => toggleDrawer(anchor as Anchor, true)} 
               >
-                <img src={menu} alt="side bar" />
+                <img src={menu} alt="side bar" className="white_image" />
               </div>
+
               <Drawer
                 anchor={anchor as Anchor}
-                open={drawer[anchor as Anchor]} // Access the drawer state based on the anchor
-                onClose={() => toggleDrawer(anchor as Anchor, false)} // Close the drawer
+                open={drawer[anchor as Anchor]} 
+                onClose={() => toggleDrawer(anchor as Anchor, false)} 
                 className="side_bar_drawer"
                 PaperProps={{
                   sx: {

@@ -2,10 +2,16 @@ import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 import { ChartOptions } from "chart.js";
 import "./styles.scss";
+import { useAppContext } from "../../../utilities/utils/Utils";
 
 function BarChart() {
+  const { state: appState } = useAppContext();
+
+  const { theme } = appState;
+
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const chartInstanceRef = useRef<Chart | null>(null);
+  const labelColor = theme === "dark" ? "#ffffff" : "#484554";
 
   useEffect(() => {
     if (chartRef.current) {
@@ -39,7 +45,7 @@ function BarChart() {
                 data: [
                   300, 500, 700, 600, 800, 400, 900, 600, 750, 850, 300, 650,
                 ],
-                backgroundColor: "#8576ff", 
+                backgroundColor: "#8576ff",
                 borderWidth: 1,
               },
             ],
@@ -52,26 +58,6 @@ function BarChart() {
                 display: false,
               },
             },
-            // scales: {
-            //   y: {
-            //     beginAtZero: true,
-            //     max: 1000,
-            //     ticks: {
-            //       stepSize: 200,
-            //     },
-            //     grid: {
-            //       color: "#f1f5f9", // Light grid color for dotted effect
-            //       borderDash: [5, 5], // Dotted line effect
-            //     },
-            //   },
-            //   x: {
-            //     grid: {
-            //       color: "#f1f5f9", // Light grid color for dotted effect
-            //       borderDash: [5, 5], // Dotted line effect
-            //     },
-            //   },
-            // },
-
             scales: {
               x: {
                 grid: {
@@ -80,7 +66,9 @@ function BarChart() {
                 border: {
                   dash: [5, 5],
                 },
-                
+                ticks: {
+                  color: labelColor,
+                },
               },
               y: {
                 beginAtZero: true,
@@ -93,10 +81,11 @@ function BarChart() {
                 },
                 ticks: {
                   stepSize: 200,
+                  color: labelColor,
                 },
               },
             },
-          } as ChartOptions, 
+          } as ChartOptions,
         });
       }
     }
@@ -107,7 +96,7 @@ function BarChart() {
         chartInstanceRef.current.destroy();
       }
     };
-  }, []);
+  }, [labelColor]);
 
   return (
     <div className="chart">

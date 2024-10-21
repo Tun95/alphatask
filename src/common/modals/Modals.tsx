@@ -10,11 +10,12 @@ interface EventDetailsModalProps {
   event: DataType | null;
 }
 export function EventDetailsModal({ event }: EventDetailsModalProps) {
-  const { currentModal, handleCloseModal } = useAppContext();
-  if (!event) return null; // No event selected, don't render the modal
+  const { state, currentModal, handleCloseModal } = useAppContext();
+  if (!event) return null;
 
   console.log("EVENT DETAILS:", event);
 
+  const { theme } = state;
   return (
     <div>
       <Modal
@@ -24,7 +25,11 @@ export function EventDetailsModal({ event }: EventDetailsModalProps) {
         aria-describedby="event-modal-description"
         className="event_modal_drawer"
       >
-        <Box className="events_menu_modal drawer_modal  ">
+        <Box
+          className={`events_menu_modal drawer_modal ${
+            theme === "dark" ? "drawer_modal_dark" : ""
+          }`}
+        >
           <div className="drawer_close_icon">
             <span onClick={handleCloseModal} className="span_icon l_flex">
               <CloseIcon className="icon" />
@@ -49,7 +54,7 @@ export function EventDetailsModal({ event }: EventDetailsModalProps) {
             <div className="speaker">
               <div className="img a_flex">
                 {event.speakers.map(() => (
-                  <img src={sp} alt="speaker" className="speaker_img"  />
+                  <img src={sp} alt="speaker" className="speaker_img" />
                 ))}
               </div>
               <div className="sp_list">

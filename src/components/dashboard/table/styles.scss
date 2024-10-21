@@ -3,6 +3,17 @@
     color: var(--color-primary-dark);
     margin-bottom: 10px;
 
+    &.filters_section_dark {
+      .search_box {
+        .icon {
+          color: var(--color-text-txt) !important;
+        }
+      }
+      h5,
+      label {
+        color: var(--color-text);
+      }
+    }
     .left_boxes {
       gap: 10px;
       flex-wrap: wrap;

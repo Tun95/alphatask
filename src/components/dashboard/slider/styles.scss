@@ -19,6 +19,9 @@
           bottom: 30px;
           color: var(--color-white);
           padding: 0px 20px;
+          &.title_desc_dark {
+            color: var(--color-text);
+          }
         }
       }
     }
@@ -38,7 +41,7 @@
           display: block;
           width: 20px;
           height: 4px;
-          background: var(--color-white);
+          background: var(--color-sl-w);
           border-radius: 2px;
         }
       }
@@ -50,7 +53,7 @@
         display: block;
         width: 10px;
         height: 4px;
-        background: var(--color-border);
+        background: var(--color-sl-bg) !important;
         border-radius: 2px;
       }
     }

@@ -23,6 +23,9 @@
   --color-blue: #3b82f6;
   --color-bl-bg: #dbeafe;
   --color-gray-bg: #f8fafc;
+  --color-sl-w: #ffffff;
+  --color-sl-bg: #f1f5f9;
+  --color-sl-br: #f1f5f9;
   --transition: all 400ms ease;
   --light-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
   --container-width-lg: 85%;
@@ -41,6 +44,7 @@
   --color-text-dull: #ffffff;
   --color-green: #3fce92;
   --color-box-txt: #cbd5e1;
+  --color-text-txt: #ada9bb;
 }
 
 html {
@@ -62,6 +66,10 @@ body {
   width: var(--container-width-lg);
   max-width: 1600px;
   margin: auto;
+}
+
+.dark .white_image {
+  filter: invert(1);
 }
 
 .f_flex {
@@ -158,19 +166,20 @@ select {
   border-radius: 50%;
   transform: 0.5s;
   z-index: 5;
-  background-color: var(--color-white);
+  background-color: var(--color-sl-w);
   outline: none;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-sl-br);
   cursor: pointer;
 }
 .dark .control_btn .next,
 .control_btn .prev {
-  background-color: var(--color-text);
-  border: 2px solid var(--color-text) !important;
+  background-color: var(--color-sl-w);
+  border: 2px solid var(--color-text);
 }
 .control_btn .prev {
   left: 10px;
   top: 165px;
+  border-color: var(--color-sl-br);
 }
 .control_btn .next {
   right: 10px;

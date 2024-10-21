@@ -21,8 +21,10 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
-  const { toggleDrawer, collapsed, setCollapsed, toggleTheme } =
+  const { state, toggleDrawer, collapsed, setCollapsed, toggleTheme } =
     useAppContext();
+
+  const { theme } = state;
 
   return (
     <>
@@ -35,7 +37,11 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
               <img src={logo} alt="Logo" className="logo" />
               {!collapsed && <h2 className="logo_text">Alphat</h2>}
             </div>
-            <div className="close_icon l_flex">
+            <div
+              className={`close_icon l_flex ${
+                theme === "dark" ? "close_icon_dark" : ""
+              }`}
+            >
               <CloseIcon
                 className="icon"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
@@ -51,7 +57,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item "
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <HomeOutlinedIcon className="icon" />
+                <HomeOutlinedIcon
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Home</span>}
               </Link>
               <Link
@@ -59,7 +67,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <CalendarMonthOutlinedIcon className="icon" />
+                <CalendarMonthOutlinedIcon
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Events</span>}
               </Link>
               <Link
@@ -67,7 +77,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <RecordVoiceOverOutlinedIcon className="icon" />
+                <RecordVoiceOverOutlinedIcon
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Speakers</span>}
               </Link>
               <Link
@@ -75,7 +87,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <ArticleOutlinedIcon className="icon" />
+                <ArticleOutlinedIcon
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Reports</span>}
               </Link>
             </div>
@@ -85,7 +99,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <NotificationsNoneOutlinedIcon className="icon" />
+                <NotificationsNoneOutlinedIcon
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {collapsed && (
                   <span className="dot">
                     <FiberManualRecordIcon className="dot_icon" />
@@ -97,7 +113,13 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                     <>
                       <span className="list_item"> Notifications</span>
                       <span className="couter l_flex">
-                        <small className="count">3</small>
+                        <small
+                          className={`count ${
+                            theme === "dark" && "count_dark"
+                          }`}
+                        >
+                          3
+                        </small>
                       </span>{" "}
                     </>
                   )}
@@ -108,7 +130,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <CommentOutlined className="icon" />
+                <CommentOutlined
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Messages</span>}
               </Link>
               <Link
@@ -116,7 +140,9 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 className="menu_item"
                 onClick={() => toggleDrawer(anchor as Anchor, false)}
               >
-                <SettingOutlined className="icon" />
+                <SettingOutlined
+                  className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                />
                 {!collapsed && <span className="list_item"> Settings</span>}
               </Link>
 
@@ -126,14 +152,17 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 onClick={() => setCollapsed(!collapsed)}
               >
                 {collapsed ? (
-                  <KeyboardDoubleArrowLeftIcon className="icon" />
+                  <KeyboardDoubleArrowLeftIcon
+                    className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                  />
                 ) : (
-                  <KeyboardDoubleArrowRightIcon className="icon" />
+                  <KeyboardDoubleArrowRightIcon
+                    className={`icon ${theme === "dark" ? "icon_dark" : ""} `}
+                  />
                 )}
                 {!collapsed && <span className="list_item"> Collapse</span>}
               </div>
 
-              {/* THEME SWITCH */}
               {/* THEME SWITCH */}
               <div className="menu_item dark_mode" onClick={toggleTheme}>
                 <Switch

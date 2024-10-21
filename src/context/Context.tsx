@@ -16,9 +16,10 @@ interface State {
 
 // Define the action types, including theme and drawer actions
 interface Action {
-  type: "TOGGLE_THEME" | "TOGGLE_DRAWER";
+  type: "TOGGLE_THEME" | "SET_THEME" | "TOGGLE_DRAWER";
   anchor?: Anchor;
   open?: boolean;
+  theme?: "light" | "dark"; // Add theme for SET_THEME action
 }
 
 // Define the context props for state, dispatch, and toggleDrawer
@@ -57,11 +58,18 @@ function reducer(state: State, action: Action): State {
   const newTheme = state.theme === "light" ? "dark" : "light";
   switch (action.type) {
     case "TOGGLE_THEME":
-      localStorage.setItem("theme", newTheme); 
+      localStorage.setItem("theme", newTheme);
       return {
         ...state,
         theme: newTheme,
       };
+
+    case "SET_THEME":
+      return {
+        ...state,
+        theme: action.theme ?? "light", // Fallback to "light"
+      };
+
     case "TOGGLE_DRAWER":
       if (action.anchor) {
         return {
@@ -70,6 +78,7 @@ function reducer(state: State, action: Action): State {
         };
       }
       return state;
+
     default:
       return state;
   }
@@ -88,7 +97,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark";
     if (savedTheme) {
-      dispatch({ type: "TOGGLE_THEME" }); // Set the theme based on localStorage
+      dispatch({ type: "SET_THEME", theme: savedTheme });
     }
   }, []);
 
@@ -102,7 +111,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
     } else {
       root.classList.remove("dark");
     }
-  }, [state.theme]); // Re-run when theme changes
+  }, [state.theme]);
 
   // Function to handle drawer toggling
   const toggleDrawer = (anchor: Anchor, open: boolean) => {
@@ -156,7 +165,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
     currentModal,
     handleOpenModal,
     handleCloseModal,
-    toggleTheme, 
+    toggleTheme,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
