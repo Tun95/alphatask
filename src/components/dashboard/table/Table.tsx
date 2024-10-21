@@ -165,13 +165,25 @@ function TableComponent() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </form>
+            {/* DATE */}
             <div className="form_group">
-              <input
-                type="date"
+              <select
+                name="date"
+                id="date"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-              />
+              >
+                <option value="">Date</option>
+                {[...new Set(data.map((item) => item.date))].map(
+                  (date, index) => (
+                    <option value={date} key={index}>
+                      {date}
+                    </option>
+                  )
+                )}
+              </select>
             </div>
+
             <div className="form_group">
               <select
                 name="status"
@@ -259,7 +271,7 @@ function TableComponent() {
                     expandedRowRender: (record) => (
                       <div className="expanded_content">
                         <div className="exp_content c_flex">
-                          <p>{record.speakers.join(", ")}</p>
+                          <p>{record.speakers[0]}</p>
                           <p>{formatDate(record.date)}</p>
                         </div>
                       </div>
@@ -329,7 +341,7 @@ function TableComponent() {
                   title="Speakers"
                   dataIndex="speakers"
                   key="speakers"
-                  render={(speakers: string[]) => speakers.join(", ")} // Display all speakers
+                  render={(speakers: string[]) => speakers[0]}
                 />
               </>
             )}
