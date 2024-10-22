@@ -174,7 +174,11 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                 {!collapsed && <span className="list_item">Dark mode</span>}
               </div>
 
-              <div className="menu_item user_info">
+              <Link
+                to="/profile"
+                onClick={() => toggleDrawer(anchor as Anchor, false)}
+                className="menu_item user_info"
+              >
                 <img src={user} alt="User" className="user_icon" />
                 {!collapsed && (
                   <div className="name_email">
@@ -182,7 +186,7 @@ const SideBar: React.FC<SideBarProps> = ({ anchor }) => {
                     <span className="email">rudra.dev@gmail.com</span>
                   </div>
                 )}
-              </div>
+              </Link>
             </div>
           </div>
         </div>
