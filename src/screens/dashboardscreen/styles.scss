@@ -18,6 +18,14 @@
         width: 100%;
         overflow: hidden;
         margin-bottom: 60px;
+        .nav {
+          /*======= MEDIA QUERIES (SMALL DEVICES) =======*/
+          @media screen and (max-width: 540px) {
+            h2 {
+              font-size: 18px;
+            }
+          }
+        }
         .widgets {
           display: flex;
           padding: 20px 0px;
