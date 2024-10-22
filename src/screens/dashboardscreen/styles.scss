@@ -77,9 +77,10 @@
           padding-right: 0;
           .widgets,
           .chart_slider_section,
-          .table_filters {
+          .table_filters > .header {
             padding: 10px 20px;
           }
+
           .chart_slider_section {
             .chart_slider {
               grid-template-columns: 1fr;
