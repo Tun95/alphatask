@@ -23,7 +23,7 @@ function BottomNav() {
 
   useEffect(() => {
     switch (location.pathname) {
-      case "/home":
+      case "/":
         setValue(0);
         break;
       case "/events":
@@ -66,7 +66,7 @@ function BottomNav() {
             // Navigate to the corresponding route
             switch (newValue) {
               case 0:
-                navigate("/home");
+                navigate("/");
                 break;
               case 1:
                 navigate("/events");
@@ -81,7 +81,7 @@ function BottomNav() {
                 navigate("/profile");
                 break;
               default:
-                navigate("/home"); // Default to Home
+                navigate("/"); // Default to Home
             }
           }}
           sx={{ bgcolor: backgroundColor }}
