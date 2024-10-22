@@ -22,7 +22,6 @@ function BottomNav() {
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
-    // Match the location.pathname with the correct index for the BottomNavigationAction
     switch (location.pathname) {
       case "/home":
         setValue(0);
@@ -40,11 +39,11 @@ function BottomNav() {
         setValue(4);
         break;
       default:
-        setValue(0); // Default to Home if path doesn't match
+        setValue(0); 
     }
   }, [location.pathname]);
 
-  const backgroundColor = theme === "dark" ? "#484554" : "#ffffff"; // Example light color
+  const backgroundColor = theme === "dark" ? "#484554" : "#ffffff"; 
 
   return (
     <div className="bottom_nav">
