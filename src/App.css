@@ -35,6 +35,8 @@
 
 .dark {
   --color-bg: #484554;
+  --color-bg-dark: #474253;
+  --color-bg-light: #807b8d;
   --color-text: #ffffff;
   --color-primary: #484554;
   --color-hover-bg: #8576ff;

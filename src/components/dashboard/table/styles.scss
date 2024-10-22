@@ -162,8 +162,6 @@
         padding-right: 0;
       }
     }
-    @media (max-width: 340px) {
-    }
 
     .status {
       border-radius: 20px;
@@ -187,6 +185,31 @@
     }
     .expand_icons {
       display: none;
+    }
+    &.table_section_dark {
+      .ant-table-thead > tr > th {
+        background-color: var(--color-bg-light);
+      }
+      .ant-table-tbody > tr:hover {
+        background-color: var(--color-bg) !important;
+      }
+
+      .ant-table-tbody > tr:hover > td {
+        background-color: var(--color-bg) !important;
+      }
+
+      .status_column {
+        .status {
+          &.status_green {
+            background: transparent;
+            border: 1px solid var(--color-green);
+          }
+          &.status_blue {
+            background: transparent;
+            border: 1px solid var(--color-blue);
+          }
+        }
+      }
     }
   }
 }
@@ -235,8 +258,12 @@
 
 .pagination-icon {
   border: 1px solid var(--color-border);
-  padding: 4px;
+  padding: 6px;
   border-radius: 4px;
+  .pag_icon {
+    font-size: 18px;
+    color: var(--color-text-dull);
+  }
 }
 
 .ant-pagination-options .ant-select-selector {
@@ -247,8 +274,42 @@
   align-items: center;
 }
 
-.ant-select-dropdown .ant-select-item-option-content:before {
-  content: "Show: ";
-  font-weight: 600;
+.ant-select-dropdown .ant-select-item-option-content:after {
+  content: " Row";
+  font-weight: 500;
   margin-right: 5px;
+}
+.table_section_dark {
+  .table .ant-pagination-item {
+    background: transparent;
+    a {
+      border-radius: 50% !important;
+      color: var(--color-text) !important;
+      background: transparent !important;
+    }
+  }
+
+  .table .ant-pagination-item-active {
+    background-color: var(--color-hover-bg);
+
+    color: var(--color-text);
+  }
+
+  .table .ant-pagination-item-active a {
+    color: var(--color-text) !important;
+  }
+
+  .pagination-icon {
+    background-color: var(--color-border);
+    .pag_icon {
+      font-size: 18px;
+      color: var(--color-hover-bg);
+    }
+  }
+
+  .ant-pagination-options .ant-select-selector {
+    background-color: var(--color-border);
+    border: none;
+    color: var(--color-text);
+  }
 }
